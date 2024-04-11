@@ -1,0 +1,314 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Nunito', sans-serif;
+    color: #ffffff;
+  }
+  
+  html
+  {
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  body
+  {
+    background-color: #181419;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10vh 1fr 1fr 15vh;
+    overflow-x: hidden;
+  }
+  
+  header{
+    background-color: #9f3647;
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: 0px 80px;
+    }
+  
+  nav h2 a{
+    text-decoration: none;
+  }
+  
+  nav ul{
+    display: flex;
+    flex: row;
+    justify-content: space-around;
+  }
+  nav ul li{
+    margin: 0px 10px;
+    list-style-type: none;
+    font-weight: 700
+    ;
+    font-size: 1.1rem;
+    text-align: center;
+    vertical-align: baseline;
+  }
+  .diferente{
+    background-color: #181419;
+    transition: 1s ease-in-out;
+  }
+  nav ul li a{
+    text-decoration: none;
+    height: 30px;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    transition: 1s ease-in-out;
+    
+  }
+  nav ul li a:hover{
+    background-color: #9f3647;
+    box-shadow: 0px 0px 10px 0px rgb(0, 0, 0.5);
+  }
+  
+  .diferente:hover{
+    background-color: #9f3647;
+     box-shadow: 0px 0px 10px 0px rgb(0, 0, 0.5);
+  }
+  
+  main{
+    background-image:linear-gradient(to right top, #0000009a, #0000009a),url('https://imgs.search.brave.com/eUWdanHf7NW-EzwpfQWyS1oytdlnVOBaCrmPKMbBXs0/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMudW5zcGxhc2gu/Y29tL3Bob3RvLTE2/MTU5ODYyMDA3NjIt/YTFlZDk2MTBkM2Ix/P3E9ODAmdz0xMDAw/JmF1dG89Zm9ybWF0/JmZpdD1jcm9wJml4/bGliPXJiLTQuMC4z/Jml4aWQ9TTN3eE1q/QTNmREI4TUh4elpX/RnlZMmg4TVRaOGZI/WnBaVzVrYnlVeU1I/QmxiR2xqZFd4aGMz/eGxibnd3Zkh3d2ZI/eDhNQT09');
+    background-size: cover;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    animation: appear 1s linear both;
+    
+  }
+  
+  
+  main h1{
+    font-size: 4rem;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 1em;
+  }
+  
+  main p{
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  main a{
+    font-size: 15px;
+    font-weight: 600;
+    padding: 1rem 1rem;
+    background-color: #9f3647;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  main a:hover{
+    box-shadow: 0px 0px 10px 0px rgb(255, 255, 255);
+  }
+  
+  section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+  
+  section h2{
+    font-size: 50px;
+    margin-top: 2.5em;
+  }
+  
+  form{
+    display: flex;
+    margin-top: 4em;
+    border-bottom: 2px solid #9f3647;
+    width: 80%;
+    justify-content: center;
+    padding-bottom: 80px;
+  }
+  .Buscar{
+    width: 500px;
+    height: 50px;
+    font-size: 20px;
+    border-radius:25px ;
+    padding: 20px;
+    border: 2px solid white;
+    margin: 20px 10px;
+    }
+  
+  .no{
+      background-color: #9f3647;
+      display: inline-block;
+      height: 50px;
+      margin: 20px 10px;
+      padding: 0 20px;
+      border-radius: 25px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: 2px solid white;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .no:hover{
+    transform: scale(0.9);
+    box-shadow: 0px 0px 10px 1px rgb(255,255,255);
+  }
+  
+  .container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: move 4s linear both;
+    animation-timeline: view(50%);
+    margin-bottom: 5em;
+  }
+  .Peliculas{
+    width: 80%;
+    animation: move linear both;
+    animation-timeline: view(40%);
+  }
+  .Peliculas h3{
+    font-size: 2.2rem;
+    font-weight: 650;
+    font-family: 'Nunito', sans-serif;
+    margin-bottom: 40px;
+  }
+  
+  .pelis div{
+    background-color: salmon;
+    height: 300px;
+    width: 200px;
+    margin: 10px;
+    border-radius: 10px;
+  }
+  
+  .pelis{
+    display: grid;
+    place-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 30px 15px;
+    border-bottom: 2px solid #9f3647;
+    padding-bottom: 60px;
+    width: 100%;
+  }
+  
+  .container-animation{
+    margin-top: 80px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  .aclamadas{
+    font-size: 2.2rem;
+    font-weight: 650;
+    font-family: 'Nunito', sans-serif;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+  
+  }
+  
+  .Mas{
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    max-height: 100%;
+    max-width: 90vw;
+    justify-content: center;
+    align-items: center;
+  }
+  .Mas div{
+    background-color: salmon;
+    min-height: 300px;
+    min-width: 200px;
+    margin: 0px 20px;
+    border-radius: 10px;
+  }
+  
+  footer{
+    background-color: #9f3647;
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+  }
+  footer ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  footer ul li{
+    list-style-type: none;
+    margin: 10px;
+    font-weight: 600;
+  }
+  
+  .Administrador{
+    background-color:#181419;
+    padding: 12px;
+    border-radius: 10px;
+  }
+  @keyframes move{
+    from{
+      opacity: 0;
+      translate: 0 150px;
+    }
+    to{
+    opacity: 1;
+    translate: 0px 0px;
+    }
+  }
+  
+  @keyframes appear{
+    from{
+      opacity: 0;
+      scale: 0;
+    }
+    to{
+      opacity: 1;
+      scale: 1;
+    }
+  }
+  @keyframes row {
+    from{
+      opacity: 0;
+      translate: 100% 0;
+    }
+    to{
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+  @keyframes anti{
+    from{
+      opacity: 0;
+      translate: 0px 0px;
+    }
+    to{
+      opacity: 1;
+      translate: 0px 0px;
+    }
+  }
+  
