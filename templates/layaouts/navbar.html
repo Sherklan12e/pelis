@@ -1,9 +1,10 @@
 
 <header>
-    <nav>CAC-Movies</a></h2>
+    <nav>
+      <a href="/">CAC-Movies</a></h2>
       <ul class="header ul">
         <li><a href="#">Tendencias</a></li>
-        
+        <li><a href="#">{{request.user}}</a></li>
         {% if user.is_authenticated %}
         <li ><a class="diferente"href="{% url 'salir' %}">salir</a>
         {% else %}

@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Registro{% endblock title %}
 {% block content %}
-<form method=post >
-{% csrf_token %}
-{{forms}}
-<button>registrar</button>
-</form>
+<div class="kkkkk">
+
+    <form class="forms" method=post >
+    {% csrf_token %}
+    {{forms}}
+    <button>registrar</button>
+    </form>
+</div>
 
 {% endblock content %}
 
