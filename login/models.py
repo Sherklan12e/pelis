@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+class pelicula(models.Model):
+    nombre = models.CharField(max_length=250)
+    descripcion = models.TextField()
