@@ -3,8 +3,15 @@
     <nav>CAC-Movies</a></h2>
       <ul class="header ul">
         <li><a href="#">Tendencias</a></li>
-        <li><a href="#">Registrarte</a></li>
-        <li ><a class="diferente"href="#">Iniciar Secion</a>
+        
+        {% if user.is_authenticated %}
+        <li ><a class="diferente"href="{% url 'salir' %}">salir</a>
+        {% else %}
+
+          <li><a href="{% url 'register' %}">Registrarte</a></li>
+          <li ><a class="diferente"href="{% url 'login' %}">Iniciar Secion</a>
+        {% endif %}
+          
         </li>
       </ul>
     </nav>
