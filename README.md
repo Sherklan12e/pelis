@@ -49,7 +49,7 @@ erDiagram
     }
 
     User ||--o{ Comentarios: "Usuario deja comentario"
-    Admin ||--o{ Peliculas: "Admin puede agregar/modificar películas"
+    Admin ||--o{ Peliculas: "Admin puede agregar/modificar peliculas"
     Peliculas ||--o{ Muchosgeneros: "Pertenece a muchos generos"
     Genero ||--o{ Muchosgeneros: "Pertenece a un muchas peliculas"
     User ||--o{ Peliculas: "Usuario marca como vista/favorita"
