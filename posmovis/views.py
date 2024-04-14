@@ -1,13 +1,19 @@
 from django.shortcuts import render, redirect
 from .forms import Register
+
+from login.models import pelicula
+
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 
 def index(request):
-    
-    return render(request, "index.html")
+    todo = pelicula.objects.all()
+    context = {
+        "todo":todo,
+    }
+    return render(request, "index.html", context)
 
 
 def registeruser(request):

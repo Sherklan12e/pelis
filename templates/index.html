@@ -27,27 +27,21 @@
     <div class="Peliculas">
       <h3>Las tendencias de hoy</h3>
       <div class="pelis">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        
+        {% for peli in todo %}
+        <a href="{% url 'detailpeli' peli.id %}">
+          <div class="peli">
+            <img src="{{peli.imagen}}" alt="">
+            <h3>{{peli.nombre|truncatechars:14}}</h3>
+          </div>
+       </a>
+        {% endfor %}
+          
+
+
       </div>
+
+
     </div>
   <div class="container-animation">
     <h3 class="aclamadas">Las mas aclamadas</h3>
