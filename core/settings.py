@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     #APPS 
     'login',
     'posmovis',
+    'perfil',
     
     #libreris
     'django_countries',

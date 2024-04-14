@@ -1,15 +1,60 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Registro{% endblock title %}
 {% block content %}
-<div class="kkkkk">
 
-    <form class="forms" method=post >
-    {% csrf_token %}
-    {{forms}}
-    <button>registrar</button>
+<div class="video-background">
+    <video autoplay loop  class="video-bg">
+        <source src="{% static 'videos/kong.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+    <h2 class="text-3xl font-bold mb-6 text-center text-white">Registro</h2>
+    <form class="max-w-md mx-auto" method="post">
+        {% csrf_token %}
+        {{ forms.as_p }} 
+        
+        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Registrarse</button>
     </form>
 </div>
 
+<style>
+    .video-background {
+        position: fixed;
+        
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        z-index: -1;
+    }
+
+    .video-bg {
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .container form {
+        background-color: rgba(255, 255, 255, 0.9); 
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 200px;
+    }
+
+</style>
+
 {% endblock content %}
-
-

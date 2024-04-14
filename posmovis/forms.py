@@ -11,11 +11,15 @@ class Register(forms.Form):
         ('hombre','Hombre'),
         ('mujer','Mujer'),
     ]
-    username = forms.CharField(max_length=250 , widget=forms.TextInput(attrs={'class': 'f form-control'}))
-    password1 = forms.CharField(label='password' , widget=forms.PasswordInput(attrs={'class':'f password1'}))
-    password2 = forms.CharField(label='repet password !' , widget=forms.PasswordInput(attrs={'class':'f password2'}))
-    sexo = forms.ChoiceField(choices=CHOICES, label='Sexo',widget=forms.Select(attrs={'class':'f sexo-election'}))
-    email = forms.EmailField(required=True , widget=forms.EmailInput(attrs={'class':'f emailregister'}))
+    username = forms.CharField(max_length=250 , label='', widget=forms.TextInput(attrs={'class': 'my-4 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500', 'placeholder':'nombre'}))
+    
+    password1 = forms.CharField(label='' , widget=forms.PasswordInput(attrs={'class':'my-4  w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500', 'placeholder':'Contraseña'}))
+    
+    password2 = forms.CharField(label=''  ,  widget=forms.PasswordInput(attrs={'class':'my-4  w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500',  'placeholder':'Confirma contraseña'}))
+    
+    sexo = forms.ChoiceField(choices=CHOICES, label='' , widget=forms.Select(attrs={'class':'my-4  w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500',  'placeholder':'Genero'}))
+    
+    email = forms.EmailField(required=True ,label='', widget=forms.EmailInput(attrs={'class':'my-4 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" placeholder="Ingrese su Correo porfavor', 'placeholder':'Correo'}))
     
     
     
