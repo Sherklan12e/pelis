@@ -6,6 +6,17 @@
     <div class="movie-detail">
         <div class="poster">
             <img src="{{peli.imagen}}" alt="{{peli.nombre}}">
+            
+                <form action="{% url 'likepeli' peli.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Me gusta {{peli.like}}</button>
+                </form>
+
+                
+                <form action="{% url 'dislikepeli' peli.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">No me gusta {{peli.dislike}}</button>
+                </form>
         </div>
         <div class="info">
             <h2 class="title">{{peli.nombre}}</h2>
@@ -14,7 +25,6 @@
             <p class="genre">Género: {{peli.genero}}</p>
             <p class="release-date">Fecha de Estreno: {{peli.fecha_de_estreno}}</p>
             <p class="release-date">Fecha de Estreno: {{peli.duracion}}</p>
-            
                 
             <IFRAME SRC="{{peli.codigo_peli}}" FRAMEBORDER=0 MARGINWIDTH=0 MARGINHEIGHT=0 SCROLLING=NO WIDTH=640 HEIGHT=360 allowfullscreen>
 

@@ -15,6 +15,8 @@ class pelicula(models.Model):
     fecha_de_estreno = models.DateField()
     duracion = models.PositiveBigIntegerField()
     codigo_peli = models.TextField()
+    like = models.PositiveIntegerField(default=0)
+    dislike = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return  "Nombre de la pelicula: " + self.nombre 
