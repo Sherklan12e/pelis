@@ -21,3 +21,7 @@ class pelicula(models.Model):
     def __str__(self):
         return  "Nombre de la pelicula: " + self.nombre 
     
+    
+    class Meta:
+        ordering = ['-nombre']
+    

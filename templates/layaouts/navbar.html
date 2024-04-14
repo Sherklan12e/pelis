@@ -10,7 +10,7 @@
           <li><a href="{% url 'profile' request.user %}" class="text-white font-semibold">{{request.user}}</a></li>
             <li class="relative">
               <div class="h-6 w-6 rounded-full overflow-hidden bg-gray-500 flex items-center justify-center">
-                  <a href="{% url 'profile' request.user %}"><img src="https://t3.ftcdn.net/jpg/05/53/79/60/360_F_553796090_XHrE6R9jwmBJUMo9HKl41hyHJ5gqt9oz.jpg" alt="Foto de perfil" class="h-full w-full object-cover"></a>
+                  <a href="{% url 'profile' request.user %}"><img src="{{request.user.profile.imagen.url}}" alt="Foto de perfil" class="h-full w-full object-cover"></a>
               </div>
             </li>
           <li><a href="{% url 'salir' %}" class="text-white"><i class="fa-solid fa-right-to-bracket"></i> salir</a></li>

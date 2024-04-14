@@ -1,8 +1,11 @@
+from django.conf import settings 
+from django.conf.urls.static import static
+
 from django.contrib import admin
 from django.urls import path
 from posmovis.views import index , registeruser, Loginuser, salir
 from login.views import detailpeli, megusta, nomegusta, error_404_view
-from perfil.views import view_profile
+from perfil.views import view_profile, editarperfil
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -27,5 +30,8 @@ urlpatterns = [
     
     #perfil 
     path('profile/<str:username>/', view_profile, name='profile'),
+    path('profile/', editarperfil , name='editarperfil')
     
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

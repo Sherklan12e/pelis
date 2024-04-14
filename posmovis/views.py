@@ -1,3 +1,4 @@
+import os 
 from django.shortcuts import render, redirect
 from .forms import Register
 
@@ -23,6 +24,7 @@ def registeruser(request):
             
             
             user = forms.save()
+            
             
             login(request ,user)
             return redirect('index')

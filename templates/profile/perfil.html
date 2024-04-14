@@ -1,12 +1,33 @@
 {% extends "base.html" %}
-
+{% load static %}
+{% block title %}Perfil{% endblock title %}
 {% block content %}
 
-{{profile}}
-
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-gray-200 p-4">
+            <img src="{{profile.imagen.url}}" alt="Profile Picture" class="w-20 h-20 rounded-full mx-auto">
+            <h2 class="text-2xl font-semibold text-center mt-4">{{profile.user}}</h2>
+            <p class="text-sm text-gray-600 text-center">{{profile.user.email}}</p>
+        </div>
+        
+        {% if request.user == profile.user %}
+            
+        <div class="p-4">
+            <h3 class="text-lg font-semibold">Información Personal</h3>
+            <div class="mt-2">
+                <p><span class="font-semibold">Nombre:</span> {{profile.user}}</p>
+                <p><span class="font-semibold">Correo Electrónico:</span> {{profile.user.email}}</p>
+                <p><span class="font-semibold">Pais:</span>{{profile.country.name}}</p>
+            </div>
+        </div>
+        <div class="flex justify-center items-center p-4">
+            <a href="{% url 'editarperfil' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg">Editar Perfil</a>
+            <a href="#" class="ml-4 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">Eliminar Cuenta</a>
+        </div>
+        {% endif %}
+            
+    </div>
+</div>
 
 {% endblock content %}
-
-
-
-
