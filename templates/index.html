@@ -1,69 +1,44 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
-<main class="main">
-    <h1>
-      Peliculas y series
-      ilimitadas
-      <br> 
-      en un solo lugar
-    </h1>
-    <p>Disfruta donde quieras.<br>
-    Cancela cualquier momento.</p>
-    <a href="#">Registrate</a>
-</main>
-<section>
-    <div class="container">
-      <h2>¿Qué estas buscando para ver?</h2>
-      <form>
-        <input class= "Buscar"type="text"
-        placeholder="Buscar.."
-        name="Buscar">
-        <input class="no" type="submit"
-        value="Buscar">
-      </form>
-    </div>
-    <div class="Peliculas">
-      <h3>Las tendencias de hoy</h3>
-      <div class="pelis">
+
+<div class="relative bg-cover bg-center h-screen" style="background-image: url('https://imagenes.elpais.com/resizer/c7Wz4PouZvKreFCuYBo7exirxtM=/1960x1103/cloudfront-eu-central-1.images.arcpublishing.com/prisa/FNBHKQ5AGRDIPOEJMPTCRHRGL4.jpg');">
+  <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+      <h1 class="text-5xl font-bold mb-4 text-center">Bienvenido a Nuestra Plataforma de Películas</h1>
+      <p class="text-lg text-center mb-8">Descubre las mejores películas y series en un solo lugar.</p>
+      <div class="w-3/4 md:w-1/2 lg:w-1/3 bg-white bg-opacity-90 rounded-lg p-4">
+          <input type="text" placeholder="Buscar películas..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+      </div>
+  </div>
+</div>
+
+
+  <section>
+    
+     
+      
+      <div class="container mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         
         {% for peli in todo %}
-        <a href="{% url 'detailpeli' peli.id %}">
-          <div class="peli">
-            <img src="{{peli.imagen}}" alt="">
-            <h3>{{peli.nombre|truncatechars:14}}</h3>
-          </div>
-       </a>
-        {% endfor %}
+
+        <!-- Película 1 -->
+        <div class="bg-gray-300 shadow-lg  rounded-lg overflow-hidden">
+          <a href="{% url 'detailpeli' peli.id  %}">
+          <img src="{{ peli.imagen }}" alt="Película 1" class="w-full h-64 object-cover object-center"></a>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold">{{ peli.nombre|truncatechars:14 }}</h3>
+                    <p class="mt-2">{{peli.descripcion|truncatechars:40}}.</p>
+                    <a href="{% url 'detailpeli' peli.id  %}" style="text-align: center;" class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-eye"></i></a>
+                </div>
+            </div>
           
-
-
-      </div>
-
+    
+      {% endfor %}
+    </div>
+    
 
     </div>
-  <div class="container-animation">
-    <h3 class="aclamadas">Las mas aclamadas</h3>
-    <div class="Pelicula Mas">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-</section>
-
-{% endblock content %}
-
-
+  
+  </section>
+{% endblock %}

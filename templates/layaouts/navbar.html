@@ -1,22 +1,20 @@
-
-<header>
-    <nav>
-      <a href="/">CAC-Movies</a></h2>
-      <ul class="header ul">
-        <li><a href="#">Tendencias</a></li>
-        <li><a href="#">{{request.user}}</a></li>
-        {% if user.is_authenticated %}
-        <li ><a class="diferente"href="{% url 'salir' %}">salir</a>
-        {% else %}
-
-          <li><a href="{% url 'register' %}">Registrarte</a></li>
-          <li ><a class="diferente"href="{% url 'login' %}">Iniciar Secion</a>
-            
-        {% endif %}
+<nav class="bg-gray-800 p-4">
+  <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-white font-bold text-lg">Ferplis</a>
+      <ul class="flex space-x-7">
+          <li><a href="#" class="text-white font-semibold ">Inicio</a></li>
+          <li><a href="#" class="text-white font-semibold">Películas</a></li>
+          <li><a href="#" class="text-white font-semibold">Contactanos</a></li>
           
-        </li>
+          {% if user.is_authenticated %}
+          
+          <i class="fa-solid fa-user">{{request.user}}</i>
+          <li><a href="#" class="text-white"><i class="fa-solid fa-right-to-bracket"></i> salir</a></li>
+          {% else %}
+          <li><a href="#" class="text-white"><i class="fa-solid fa-user-plus font-semibold"></i>crear cuenta</a></li>
+          <li><a href="#" class="text-white"><i class="fa-solid fa-right-to-bracket font-semibold"></i>  ingresar</a></li>
+          {% endif %}
+            
       </ul>
-    </nav>
-  </header>
-
-
+  </div>
+</nav>
