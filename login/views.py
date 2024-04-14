@@ -23,3 +23,6 @@ def nomegusta(request, pk):
     movidislike.save()
     
     return redirect("detailpeli", pk=pk)
+
+def error_404_view(request, exception):
+    return render(request, '404.html', status=404)
