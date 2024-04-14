@@ -12,11 +12,13 @@ def editarperfil(request):
     profile = get_object_or_404(Profile, user=request.user)
     if request.method == 'POST':
         forms = Editarform(request.POST, request.FILES, instance=profile)
-        if profile.imagen:
+        if profile.imagen == True:
                 os.remove(profile.imagen.path)
-        if forms.is_valid():
-            forms.save()
-            return redirect('profile', username=request.user.username)
+        else:
+            
+            if forms.is_valid():
+                forms.save()
+                return redirect('profile', username=request.user.username)
     else:
         forms = Editarform(instance=profile)
     return render(request, 'profile/editar.html', {"forms": forms})
