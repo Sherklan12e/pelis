@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from posmovis.views import index , registeruser, Loginuser, salir
-from login.views import detailpeli, megusta, nomegusta, error_404_view
+from login.views import detailpeli, megusta, nomegusta, error_404_view, eliminarcomentario
 from perfil.views import view_profile, editarperfil
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +26,9 @@ urlpatterns = [
     path('peli/detail/<int:pk>/', detailpeli, name="detailpeli"),
     path('peli/emocion/<int:pk>/', megusta, name="likepeli"),
     path('peli/dislike/<int:pk>/', nomegusta, name="dislikepeli"),
+    
+    #pelicoment
+    path('peli/<int:peliid>/<int:comen>/',  eliminarcomentario , name='eliminarcomentario'),
     
     
     #perfil 

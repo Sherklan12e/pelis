@@ -55,28 +55,35 @@
         <h2 class="text-xl font-bold mb-4">Comentarios</h2>    
        
         
-        {% for comentario in todosloscomentarios  %}
-            
-        <div class="flex items-center justify-between mb-4">
-            <div class="flex items-center">
-                <img src="{{ comentario.author.profile.imagen.url }}" alt="Avatar" class="w-10 h-10 rounded-full mr-4">
-                <div>
-                    <h3 class="text-lg font-bold">{{ comentario.author }}</h3>
-                    <p class="text-gray-600">{{ comentario.text }}</p>
+       
+       {% if todosloscomentarios %}
+            {% for comentario in todosloscomentarios  %}
+                    
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <img src="{{ comentario.author.profile.imagen.url }}" alt="Avatar" class="w-10 h-10 rounded-full mr-4">
+                    <div>
+                        <h3 class="text-lg font-bold">{{ comentario.author }}</h3>
+                        <p class="text-gray-600">{{ comentario.text }}</p>
+                    </div>
                 </div>
+                
+                {% if request.user.is_authenticated  %}
+                    
+                    {% if request.user == comentario.author %}
+                        <form method="POST" action="{% url 'eliminarcomentario' peli.id comentario.id  %}">
+                            {% csrf_token %}
+                            <button type="submit" class="text-red-500 hover:text-red-700">Eliminar</button> 
+                            
+                        </form>
+                    {% endif %}
+                {% endif %}
             </div>
             
-            {% if request.user.is_authenticated  %}
-                
-                
-               
-                    
-            <a href="#" class="text-red-500 hover:text-red-700">Eliminar</a>
-            {% endif %}
-                
-        </div>
+            {% endfor %}
         
-        {% endfor %}
+       {% endif %}
+        
             
         <form  method="POST" class="flex flex-col">
             {% csrf_token %}

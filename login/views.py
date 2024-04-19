@@ -19,16 +19,15 @@ def detailpeli(request, pk):
             return redirect('detailpeli', pk=pk)
     else:
         formscoment = CommentForm()
-        
-    
-    todosloscomentarios = Comment.objects.all()
+    todosloscomentarios = Comment.objects.filter(post=peli.id)
     
     context= {
         "peli":peli,
         "formscoment":formscoment,
         "todosloscomentarios":todosloscomentarios
     }
-    
+    print(peli.id)
+    print(todosloscomentarios)
     return render(request, "posmovis/detail.html",context)
 
 
@@ -50,3 +49,12 @@ def nomegusta(request, pk):
 
 def error_404_view(request, exception):
     return render(request, '404.html', status=404)
+
+def eliminarcomentario(request, peliid, comen):
+    peli = get_object_or_404(pelicula, id=peliid)
+    comen = get_object_or_404(Comment, id=comen ,post=peli )
+    
+    if request.method=='POST':
+        comen.delete()
+        return redirect( 'detailpeli' , pk=peliid)
+    return redirect('detailpeli', pk=peliid)
