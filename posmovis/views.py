@@ -2,7 +2,7 @@ import os
 from django.shortcuts import render, redirect
 from .forms import Register
 
-from login.models import pelicula
+from login.models import pelicula, series
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
@@ -11,9 +11,13 @@ from django.contrib.auth import logout
 
 def index(request):
     todo = pelicula.objects.all()
+    series_view = series.objects.all()
     context = {
         "todo":todo,
+        "series_view":series_view,
     }
+    
+    
     return render(request, "index.html", context)
 
 
