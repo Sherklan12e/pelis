@@ -2,7 +2,8 @@ import os
 from django import forms
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
-from .models import Profile
+from .models import Profile ,Comment
+
 
 class Register(forms.Form):
     CHOICES = [
@@ -37,3 +38,14 @@ class Register(forms.Form):
             
         )
         return user
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        labels = {
+            'text':''
+        }
+        widgets = { 
+            'text': forms.Textarea( attrs={'class': 'w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 mb-4', 'placeholder':'Escribe un comentario aqui bro' })}

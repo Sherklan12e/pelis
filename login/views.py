@@ -1,11 +1,35 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
-from .models import pelicula 
+from .models import pelicula
+from posmovis.models import Comment
+from posmovis.forms import CommentForm
 
 def detailpeli(request, pk):
     peli = get_object_or_404(pelicula, id = pk)
+    if request.method=='POST':
+        formscoment = CommentForm(request.POST)
+        if formscoment.is_valid():
+            comentario = formscoment.save(commit=False)
+            if request.user.is_authenticated:
+                comentario.author = request.user
+            else:
+                return redirect('login')
+            comentario.post = peli
+            comentario.save()
+            return redirect('detailpeli', pk=pk)
+    else:
+        formscoment = CommentForm()
+        
     
-    return render(request, "posmovis/detail.html",{"peli":peli})
+    todosloscomentarios = Comment.objects.all()
+    
+    context= {
+        "peli":peli,
+        "formscoment":formscoment,
+        "todosloscomentarios":todosloscomentarios
+    }
+    
+    return render(request, "posmovis/detail.html",context)
 
 
 
