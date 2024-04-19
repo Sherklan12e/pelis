@@ -23,5 +23,5 @@ class pelicula(models.Model):
     
     
     class Meta:
-        ordering = ['-nombre']
+        ordering = ['-id']
     
