@@ -4,7 +4,7 @@ class Genero(models.Model):
     nombre = models.CharField(max_length=100)
     
     def __str__(self):
-        return "nombre de genero: " + self.nombre
+        return  self.nombre
 class pelicula(models.Model):
     nombre = models.CharField(max_length=250)
     subtitle = models.CharField(max_length=100, default="hola")

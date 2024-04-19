@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from .models import pelicula
 from posmovis.models import Comment
 from posmovis.forms import CommentForm
+from django.contrib.auth.decorators import login_required
 
 def detailpeli(request, pk):
     peli = get_object_or_404(pelicula, id = pk)
@@ -31,7 +32,7 @@ def detailpeli(request, pk):
     return render(request, "posmovis/detail.html",context)
 
 
-
+@login_required()
 def megusta(request,pk):
     movilike = get_object_or_404(pelicula, id=pk)
     movilike.like +=1
@@ -39,7 +40,7 @@ def megusta(request,pk):
     
     return redirect("detailpeli", pk=pk)
 
-
+@login_required()
 def nomegusta(request, pk):
     movidislike = get_object_or_404(pelicula, id=pk)
     movidislike.dislike  += 1
@@ -48,8 +49,9 @@ def nomegusta(request, pk):
     return redirect("detailpeli", pk=pk)
 
 def error_404_view(request, exception):
-    return render(request, '404.html', status=404)
+    return render(request, '404.html')
 
+@login_required()
 def eliminarcomentario(request, peliid, comen):
     peli = get_object_or_404(pelicula, id=peliid)
     comen = get_object_or_404(Comment, id=comen ,post=peli )
