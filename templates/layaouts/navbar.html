@@ -3,9 +3,20 @@
       <a href="/" class="text-white font-bold text-lg">Ferplis</a>
       <ul class="flex space-x-7">
           <li><a href="/" class="text-white font-semibold ">Inicio</a></li>
-          <li><a href="/" class="text-white font-semibold">Películas</a></li>
-          <li><a href="/" class="text-white font-semibold">Series</a></li>
+          <li><a href="{% url 'peliculas' %}" class="text-white font-semibold">Películas</a></li>
+          <li><a href="{% url 'series' %}" class="text-white font-semibold">Series</a></li>
+          
+          
+          
+          {% if user.is_authenticated %}
+          {% if request.user.profile.es_mayor_edad %}
+            
           <li><a href="/" class="text-white font-semibold">+18</a></li>
+          {% endif %}
+          {% endif %}
+            
+            
+            
           <li><a href="" class="text-white font-semibold">Contactanos</a></li>
           
           {% if user.is_authenticated %}

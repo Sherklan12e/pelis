@@ -16,7 +16,7 @@ def index(request):
         "todo":todo,
         "series_view":series_view,
     }
-    
+    print(request.user)
     
     return render(request, "index.html", context)
 
@@ -53,3 +53,23 @@ def salir(request):
     logout(request)
     
     return redirect("index")
+
+
+
+def peliculaspage(request):
+    todos = pelicula.objects.all()
+    
+    context = {
+        'todos':todos
+    }
+    return render(request, 'pages/peliculas.html', context)
+
+
+def seriespage(request):
+    todos = series.objects.all()
+    
+    context = {
+        'todos':todos
+    }
+    return render(request, 'pages/series.html' , context)
+

@@ -98,25 +98,25 @@
         <h2 class="text-2xl font-bold mb-4">Películas Relacionadas</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Película relacionada 1 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="ruta/a/pelicula-relacionada-1.jpg" alt="Película Relacionada 1" class="w-full h-48 object-cover object-center">
-                <div class="p-4">
-                    <h3 class="text-lg font-bold mb-2">Nombre Película 1</h3>
-                    <p class="text-gray-600">Descripción breve de la película relacionada.</p>
-                    <a href="#" class="block mt-3 text-blue-600 hover:underline">Ver Detalles</a>
+           
+           {% for seiresrela in relaciones %}
+                
+                {% if seiresrela.id != peli.id %}
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <a href="{% url 'detailpeli' seiresrela.id %}">
+
+                        <img src="{{seiresrela.imagen}}" alt="Película Relacionada 1" class="w-full h-48 object-cover object-center">
+                    </a>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">{{seiresrela.nombre}}</h3>
+                        <p class="text-gray-600">{{seiresrela.descripcion}}</p>
+                        <a href="{% url 'detailpeli' seiresrela.id %}" class="block mt-3 text-blue-600 hover:underline">Ver Detalles</a>
+                    </div>
                 </div>
-            </div>
-            <!-- Película relacionada 2 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="ruta/a/pelicula-relacionada-2.jpg" alt="Película Relacionada 2" class="w-full h-48 object-cover object-center">
-                <div class="p-4">
-                    <h3 class="text-lg font-bold mb-2">Nombre Película 2</h3>
-                    <p class="text-gray-600">Descripción breve de la película relacionada.</p>
-                    <a href="#" class="block mt-3 text-blue-600 hover:underline">Ver Detalles</a>
-                </div>
-            </div>
-            <!-- Otras películas relacionadas -->
-            <!-- Agrega más divs con el mismo formato para más películas relacionadas -->
+                {% endif %}
+                    
+           {% endfor %}
+            
         </div>
     </div>
     

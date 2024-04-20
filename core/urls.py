@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 
 from django.contrib import admin
 from django.urls import path
-from posmovis.views import index , registeruser, Loginuser, salir
+from posmovis.views import index , registeruser, Loginuser, salir, peliculaspage, seriespage
 from login.views import detailpeli, megusta, nomegusta, error_404_view, eliminarcomentario
 from perfil.views import view_profile, editarperfil
 urlpatterns = [
@@ -13,6 +13,10 @@ urlpatterns = [
     path('', index, name='index'),
     path('404/', error_404_view, name='error_404'),
     
+    #pelicuas
+    path('peliculas/', peliculaspage, name='peliculas'),
+    #series
+    path('series/', seriespage, name='series'),
     
     
     #Register and login

@@ -22,10 +22,15 @@ def detailpeli(request, pk):
         formscoment = CommentForm()
     todosloscomentarios = Comment.objects.filter(post=peli.id)
     
+    relaciones = pelicula.objects.filter(genero=peli.genero)
+            
+    
+    
     context= {
         "peli":peli,
         "formscoment":formscoment,
-        "todosloscomentarios":todosloscomentarios
+        "todosloscomentarios":todosloscomentarios,
+        "relaciones":relaciones
     }
     print(peli.id)
     print(todosloscomentarios)

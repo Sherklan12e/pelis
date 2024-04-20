@@ -4,10 +4,14 @@ from posmovis.models import Profile
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .forms import Editarform
+
 from django.contrib.auth.decorators import login_required
 
 def view_profile(request, username):
     profile = get_object_or_404(Profile, user__username=username)
+   
+    
+    
     return render(request, "profile/perfil.html", {"profile": profile})
 
 
@@ -18,8 +22,7 @@ def editarperfil(request):
         forms = Editarform(request.POST, request.FILES, instance=profile)
         if profile.imagen == True:
                 os.remove(profile.imagen.path)
-        else:
-            
+        else:   
             if forms.is_valid():
                 forms.save()
                 return redirect('profile', username=request.user.username)
