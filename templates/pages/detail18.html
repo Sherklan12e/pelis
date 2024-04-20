@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <!-- Video grande -->
+        <div class="lg:col-span-2">
+          <div class="mb-4 relative" style="padding-top: 56.25%">
+            <iframe class="absolute top-0 left-0 w-full h-full"  src="{{ pos.codigo }}"  frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen>></iframe>
+          </div>
+          
+            
+          <a href="/" class="border border-lime-500 text-center  w-28 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110  duration-300 block bg-gray-800 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"><i class="text-2xl fa-solid fa-left-long text-center"></i></a>
+          <div class="col-span-2 ">
+            <h2 class="text-3xl font-bold mb-4">{{peli.nombre}}</h2>
+            <p class="text-lg mb-4">{{peli.descripcion}}</p>
+            <div class="flex items-center mb-4">
+                <span class="text-gray-600 mr-2">Género:</span>
+                <span class="text-blue-500 font-bold">{{peli.genero}}</span>
+            </div>
+            <div class="flex items-center mb-4">
+                <span class="text-gray-600 mr-2">Director:</span>
+                <span class="text-blue-500 font-bold">Nombre del Director</span>
+            </div>
+            <div class="flex items-center mb-4">
+                <span class="text-gray-600 mr-2">Duración:</span>
+                <span class="text-blue-500 font-bold">{{peli.duracion}} minutos</span>
+            </div>
+            <div class="mb-4 ">
+                <h3 class="text-lg font-bold mb-2">Reparto:</h3>
+                <ul class="list-disc list-inside">
+                    <li>Actor 1</li>
+                    <li>Actor 2</li>
+                    <li>Actor 3</li>
+                    <!-- Agrega más actores según sea necesario -->
+                </ul>
+            </div>
+            
+            
+        </div>
+        </div>
+        <!-- Lista de videos -->
+        <div class="lg:col-span-1">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+            <!-- Video 1 -->
+           
+           {% for vi  in al %}
+           <div class="bg-white rounded overflow-hidden shadow-md">
+            <a href="{% url 'detail18' vi.id %}"><img src="{{vi.imagen}}" class="w-full h-48 object-cover object-center" alt=""></a>
+            <div class="p-4">
+              <h3 class="text-lg font-semibold">{{vi.nombre}}</h3>
+            </div>
+          </div>
+           {% endfor %}
+            
+            <!-- Video 2 -->
+           
+            <!-- Añade más videos según sea necesario -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock content %}
+    

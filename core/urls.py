@@ -3,9 +3,9 @@ from django.conf.urls.static import static
 
 from django.contrib import admin
 from django.urls import path
-from posmovis.views import index , registeruser, Loginuser, salir, peliculaspage, seriespage
+from posmovis.views import index , registeruser, Loginuser, salir, peliculaspage, seriespage, page18
 from login.views import detailpeli, megusta, nomegusta, error_404_view, eliminarcomentario
-from perfil.views import view_profile, editarperfil
+from perfil.views import view_profile, editarperfil, detail18
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -17,7 +17,9 @@ urlpatterns = [
     path('peliculas/', peliculaspage, name='peliculas'),
     #series
     path('series/', seriespage, name='series'),
-    
+    #
+    path('page18/', page18, name='18'),
+    path('page18/<int:pk>/', detail18, name='detail18'),
     
     #Register and login
     path('register/', registeruser, name='register'),

@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import Register
 
 from login.models import pelicula, series
-
+from perfil.models import mayores
 from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
@@ -72,4 +72,12 @@ def seriespage(request):
         'todos':todos
     }
     return render(request, 'pages/series.html' , context)
+
+def page18(request):
+    todos = mayores.objects.all()[:20]
+    
+    context = {
+        "todos":todos
+    }
+    return render(request, 'pages/page18.html', context)
 

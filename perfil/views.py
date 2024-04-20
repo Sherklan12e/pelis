@@ -1,6 +1,7 @@
 import os
 from django.shortcuts import render, redirect
 from posmovis.models import Profile
+from .models import mayores
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .forms import Editarform
@@ -29,3 +30,12 @@ def editarperfil(request):
     else:
         forms = Editarform(instance=profile)
     return render(request, 'profile/editar.html', {"forms": forms})
+
+def detail18(request, pk):
+    pos = get_object_or_404(mayores , id=pk)
+    al = mayores.aleatorio()[:5]
+    context = {
+        'pos':pos,
+        'al':al
+    }
+    return render(request, 'pages/detail18.html', context)
