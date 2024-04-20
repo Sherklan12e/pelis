@@ -58,7 +58,10 @@ def salir(request):
 
 def peliculaspage(request):
     todos = pelicula.objects.all()
-    
+  
+        
+        
+        
     context = {
         'todos':todos
     }
