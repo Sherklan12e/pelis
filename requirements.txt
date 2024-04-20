@@ -1,5 +1,6 @@
 asgiref==3.8.1
 Django==5.0.4
+django-birthday==0.1.4
 django-countries==7.6.1
 gunicorn==21.2.0
 packaging==24.0
