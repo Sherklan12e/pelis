@@ -1,17 +1,18 @@
 from django.conf import settings 
 from django.conf.urls.static import static
-
+from django.conf.urls import handler404
 from django.contrib import admin
 from django.urls import path
 from posmovis.views import index , registeruser, Loginuser, salir, peliculaspage, seriespage, page18
-from login.views import detailpeli, megusta, nomegusta, error_404_view, eliminarcomentario
+from login.views import detailpeli, megusta, nomegusta, eliminarcomentario
 from perfil.views import view_profile, editarperfil, detail18
+from login import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     #index
     path('', index, name='index'),
-    path('404/', error_404_view, name='error_404'),
     
     #pelicuas
     path('peliculas/', peliculaspage, name='peliculas'),
@@ -34,7 +35,7 @@ urlpatterns = [
     path('peli/dislike/<int:pk>/', nomegusta, name="dislikepeli"),
     
     #pelicoment
-    path('peli/<int:peliid>/<int:comen>/',  eliminarcomentario , name='eliminarcomentario'),
+    path('peli/<str:peliid>/<int:comen>/',  eliminarcomentario , name='eliminarcomentario'),
     
     
     #perfil 
@@ -44,3 +45,4 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = views.error_404_view

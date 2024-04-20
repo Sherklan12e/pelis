@@ -81,15 +81,15 @@ def nomegusta(request, pk):
     return redirect("detailpeli", pk=pk)
 
 def error_404_view(request, exception):
-    return render(request, '404.html')
+    context = {}
+    return render(request, '404.html', context)
 
 @login_required()
 def eliminarcomentario(request, peliid, comen):
+    comentario_id = decrypt(peliid)
+    comen = get_object_or_404(Comment, id=comen)
     
-    peli = get_object_or_404(pelicula, id=peliid)
-    comen = get_object_or_404(Comment, id=comen ,post=peli )
-    
-    if request.method=='POST':
+    if request.method == 'POST':
         comen.delete()
-        return redirect( 'detailpeli' , pk=encrypt(peliid))
+        return redirect('detailpeli', pk=peliid)
     return redirect('detailpeli', pk=peliid)

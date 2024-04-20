@@ -71,6 +71,8 @@ def salir(request):
 
 
 def peliculaspage(request):
+    
+  
     todos = pelicula.objects.all()
   
     encrypted_todos = []
