@@ -17,27 +17,12 @@
                 <span class="text-gray-600 mr-2">Género:</span>
                 <span class="text-blue-500 font-bold">{{peli.genero}}</span>
             </div>
-            <div class="flex items-center mb-4">
-                <span class="text-gray-600 mr-2">Director:</span>
-                <span class="text-blue-500 font-bold">Nombre del Director</span>
-            </div>
+           
             <div class="flex items-center mb-4">
                 <span class="text-gray-600 mr-2">Duración:</span>
                 <span class="text-blue-500 font-bold">{{peli.duracion}} minutos</span>
             </div>
-            <div class="mb-4 ">
-                <h3 class="text-lg font-bold mb-2">Reparto:</h3>
-                <ul class="list-disc list-inside">
-                    <li>Actor 1</li>
-                    <li>Actor 2</li>
-                    <li>Actor 3</li>
-                    <!-- Agrega más actores según sea necesario -->
-                </ul>
-            </div>
-            <a href="#" class=" w-28 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-100  duration-300 block bg-gray-800 hover:bg-yellow-600   bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Ver Trailer</a>
             <div class="">
-                <h1 class="text-3xl font-bold mb-4"></h1>
-                <p class="text-gray-700 mb-4"></p>
                 <div class="mb-4">
                     <div class="mb-4 relative" style="padding-top: 56.25%;">
                         <iframe class="absolute top-0 left-0 w-full h-full" src="{{ peli.codigo_peli }}" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen></iframe>
@@ -45,7 +30,8 @@
                     
                 </div>
                 
-                <a href="/" class="border border-lime-500 text-center  w-28 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110  duration-300 block bg-gray-800 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"><i class="text-2xl fa-solid fa-left-long text-center"></i></a>
+                <a href="javascript:history.back()
+                " class="border border-lime-500 text-center  w-28 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110  duration-300 block bg-gray-800 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"><i class="text-2xl fa-solid fa-left-long text-center"></i></a>
             </div>
         </div>
     </div>
@@ -71,7 +57,7 @@
                 {% if request.user.is_authenticated  %}
                     
                     {% if request.user == comentario.author %}
-                        <form method="POST" action="{% url 'eliminarcomentario' peli.id comentario.id  %}">
+                        <form method="POST" action="{% url 'eliminarcomentario' incr comentario.id  %}">
                             {% csrf_token %}
                             <button type="submit" class="text-red-500 hover:text-red-700">Eliminar</button> 
                             
@@ -92,31 +78,32 @@
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg self-start">Enviar Comentario</button>
         </form>
     </div>
-
+{% comment %} 
+    LAS PELICULAS RELACIONADAS     {% endcomment %}
     
     <div class="bg-gray-100 py-8">
         <h2 class="text-2xl font-bold mb-4">Películas Relacionadas</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Película relacionada 1 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="ruta/a/pelicula-relacionada-1.jpg" alt="Película Relacionada 1" class="w-full h-48 object-cover object-center">
-                <div class="p-4">
-                    <h3 class="text-lg font-bold mb-2">Nombre Película 1</h3>
-                    <p class="text-gray-600">Descripción breve de la película relacionada.</p>
-                    <a href="#" class="block mt-3 text-blue-600 hover:underline">Ver Detalles</a>
+          
+           
+           {% for seiresrela in relaciones_todos %}
+                
+                {% if seiresrela.id != peli.id %}
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <a href="{% url 'detailpeli' seiresrela.encrypt_key %}">
+
+                        <img src="{{seiresrela.imagen}}" alt="Película Relacionada 1" class="w-full h-48 object-cover object-center">
+                    </a>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold mb-2">{{seiresrela.nombre}}</h3>
+                        <p class="text-gray-600">{{seiresrela.descripcion}}</p>
+                        <a href="{% url 'detailpeli' seiresrela.encrypt_key %}" class="block mt-3 text-blue-600 hover:underline">Ver Detalles</a>
+                    </div>
                 </div>
-            </div>
-            <!-- Película relacionada 2 -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="ruta/a/pelicula-relacionada-2.jpg" alt="Película Relacionada 2" class="w-full h-48 object-cover object-center">
-                <div class="p-4">
-                    <h3 class="text-lg font-bold mb-2">Nombre Película 2</h3>
-                    <p class="text-gray-600">Descripción breve de la película relacionada.</p>
-                    <a href="#" class="block mt-3 text-blue-600 hover:underline">Ver Detalles</a>
-                </div>
-            </div>
-            <!-- Otras películas relacionadas -->
-            <!-- Agrega más divs con el mismo formato para más películas relacionadas -->
+                {% endif %}
+                    
+           {% endfor %}
+            
         </div>
     </div>
     

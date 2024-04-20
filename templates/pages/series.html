@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<section>
+    
+     
+      
+    <div class="container mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+      {% for serie in todos %}
+
+      <!-- Película 1 -->
+      <div class="bg-gray-300 shadow-lg  rounded-lg overflow-hidden">
+        <a href="">
+        <img src="{{serie.portada }}" alt="Película 1" class="w-full h-64 object-cover object-center"></a>
+              <div class="p-4">
+                  <h3 class="text-lg font-bold">{{ serie.title|truncatechars:20 }}</h3>
+                  <p class="mt-2">{{peli.descripcion|truncatechars:40}}</p>
+                  <a href="" style="text-align: center;" class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-eye"></i></a>
+              </div>
+      </div>
+        
+  
+    {% endfor %}
+   
+  
+</section>
+{% endblock content %}
+    

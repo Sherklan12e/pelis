@@ -7,11 +7,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-
+ENCRYPT_KEY =b'r7Y-Wtm51P_vAwm77Nbh8tIgCRcYf0-hjVdCbQFhtvA='
 # SECURITY WARNING: don't run with debug turned     on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG =True
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,[::1]").split(",")
+ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -28,10 +29,19 @@ INSTALLED_APPS = [
     'login',
     'posmovis',
     'perfil',
-    
+    'tailwind',
+    'theme',
     #libreris
     'django_countries',
 ]
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+TAILWIND_APP_NAME = 'theme'
+
+NPM_BIN_PATH = '/usr/local/bin/npm'
+
+NPM_BIN_PATH = 'npm.cmd'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,7 +88,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
+LOGIN_URL='login/   ' 
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -97,6 +107,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 PRISM_INSERTED = os.path.join(BASE_DIR, "staticfiles")
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
