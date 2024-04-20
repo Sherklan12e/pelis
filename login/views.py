@@ -4,9 +4,16 @@ from .models import pelicula
 from posmovis.models import Comment
 from posmovis.forms import CommentForm
 from django.contrib.auth.decorators import login_required
+from .encryption_util import *
+from django.contrib.contenttypes.models import ContentType
 
 def detailpeli(request, pk):
+    
+    pk = decrypt(pk)
     peli = get_object_or_404(pelicula, id = pk)
+    incr = encrypt(peli.id)
+    
+    content_ty = ContentType.objects.get_for_model(pelicula)
     if request.method=='POST':
         formscoment = CommentForm(request.POST)
         if formscoment.is_valid():
@@ -15,24 +22,44 @@ def detailpeli(request, pk):
                 comentario.author = request.user
             else:
                 return redirect('login')
-            comentario.post = peli
+            comentario.contentype = content_ty
+            comentario.object_id = pk
             comentario.save()
-            return redirect('detailpeli', pk=pk)
+            return redirect('detailpeli', incr)
     else:
         formscoment = CommentForm()
-    todosloscomentarios = Comment.objects.filter(post=peli.id)
+        
+        
+    todosloscomentarios = Comment.objects.filter(contentype=content_ty, object_id=peli.id)
     
+    
+    
+    #Esto es para peliculas relacionas con ese genero
     relaciones = pelicula.objects.filter(genero=peli.genero)
+    relaciones_todos = []
+    for todoss in relaciones:
+        encrypted_todo = {
+            'id': todoss.id,
+            'encrypt_key': encrypt(todoss.id),
+            'nombre': todoss.nombre, 
+            'imagen': todoss.imagen,
+            'encrypt_key': encrypt(todoss.id),  
+        }
+        relaciones_todos.append(encrypted_todo)
+            
+    
             
     
     
     context= {
+        "incr":incr,
+        "relaciones_todos":relaciones_todos,
         "peli":peli,
         "formscoment":formscoment,
         "todosloscomentarios":todosloscomentarios,
         "relaciones":relaciones
     }
-    print(peli.id)
+    print(encrypt(peli.id))
     print(todosloscomentarios)
     return render(request, "posmovis/detail.html",context)
 
@@ -58,10 +85,11 @@ def error_404_view(request, exception):
 
 @login_required()
 def eliminarcomentario(request, peliid, comen):
+    
     peli = get_object_or_404(pelicula, id=peliid)
     comen = get_object_or_404(Comment, id=comen ,post=peli )
     
     if request.method=='POST':
         comen.delete()
-        return redirect( 'detailpeli' , pk=peliid)
+        return redirect( 'detailpeli' , pk=encrypt(peliid))
     return redirect('detailpeli', pk=peliid)

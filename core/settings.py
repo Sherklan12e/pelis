@@ -6,7 +6,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
-
+ENCRYPT_KEY=b'AyJmh9rFTr-3J3qJckkhpPxyDuNl8sDM1WqaPxKyS7w='
 
 # SECURITY WARNING: don't run with debug turned     on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)

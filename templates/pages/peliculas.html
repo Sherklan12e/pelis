@@ -9,15 +9,15 @@
      
       
     <div class="container mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-      {% for peli in todos %}
+      {% for peli in encrypted_todos %}
 
       <!-- Película 1 -->
       <div class="bg-gray-300 shadow-lg  rounded-lg overflow-hidden">
-        <a href="{% url 'detailpeli' peli.id  %}">
+        <a href="{% url 'detailpeli' peli.encrypt_key %}">
         <img src="{{ peli.imagen }}" alt="Película 1" class="w-full h-64 object-cover object-center"></a>
               <div class="p-4">
                   <h3 class="text-lg font-bold">{{ peli.nombre|truncatechars:26 }}</h3>
-                  <a href="{% url 'detailpeli' peli.id  %}" style="text-align: center;" class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-eye"></i></a>
+                  <a href="{% url 'detailpeli' peli.encrypt_key  %}" style="text-align: center;" class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-eye"></i></a>
               </div>
       </div>
         

@@ -19,7 +19,7 @@ urlpatterns = [
     path('series/', seriespage, name='series'),
     #
     path('page18/', page18, name='18'),
-    path('page18/<int:pk>/', detail18, name='detail18'),
+    path('page18/<str:pk>/', detail18, name='detail18'),
     
     #Register and login
     path('register/', registeruser, name='register'),
@@ -29,7 +29,7 @@ urlpatterns = [
     
     #detailpeli
     
-    path('peli/detail/<int:pk>/', detailpeli, name="detailpeli"),
+    path('peli/detail/<str:pk>/', detailpeli, name="detailpeli"),
     path('peli/emocion/<int:pk>/', megusta, name="likepeli"),
     path('peli/dislike/<int:pk>/', nomegusta, name="dislikepeli"),
     
