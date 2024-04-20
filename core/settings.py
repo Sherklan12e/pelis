@@ -9,7 +9,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 ENCRYPT_KEY =b'r7Y-Wtm51P_vAwm77Nbh8tIgCRcYf0-hjVdCbQFhtvA='
 # SECURITY WARNING: don't run with debug turned     on in production!
-DEBUG =False
+DEBUG =True
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,8 +38,11 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 TAILWIND_APP_NAME = 'theme'
+
 NPM_BIN_PATH = '/usr/local/bin/npm'
+
 NPM_BIN_PATH = 'npm.cmd'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
