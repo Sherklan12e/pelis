@@ -10,8 +10,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 
 def index(request):
-    todo = pelicula.objects.all()
-    series_view = series.objects.all()
+    todo = pelicula.objects.all()[:5]
+    series_view = series.objects.all()[:5]
     context = {
         "todo":todo,
         "series_view":series_view,

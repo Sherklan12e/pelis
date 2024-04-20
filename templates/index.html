@@ -8,12 +8,12 @@
       <h1 class="text-5xl font-bold mb-4 text-center">Bienvenido a Nuestra Plataforma de Películas</h1>
       <p class="text-lg text-center mb-8">Descubre las mejores películas y series en un solo lugar.</p>
       <div class="w-3/4 md:w-1/2 lg:w-1/3 bg-white bg-opacity-90 rounded-lg p-4">
-          <input type="text" placeholder="Buscar películas..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+          <input type="text" placeholder="Buscar películas..." class="w-full px-4 py-2 text-black border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
       </div>
   </div>
 </div>
 
-<h1 class="text-center text-3xl font-bold ">Peliculas Mas Aclamadas</h1>
+<h1 class="text-center m-8 text-3xl font-bold ">Peliculas Mas Aclamadas</h1>
 
   <section>
     
@@ -31,36 +31,31 @@
                     <p class="mt-2">{{peli.descripcion|truncatechars:40}}.</p>
                     <a href="{% url 'detailpeli' peli.id  %}" style="text-align: center;" class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-eye"></i></a>
                 </div>
-            </div>
+        </div>
           
     
       {% endfor %}
      
-      {% for serie in series_view %}
-
-      <!-- Película 1 -->
-      <div class="bg-gray-300 shadow-lg  rounded-lg overflow-hidden">
-        <a href="">
-        <img src="{{ serie.portada }}" alt="Película 1" class="w-full h-64 object-cover object-center"></a>
-              <div class="p-4">
-                  <h3 class="text-lg font-bold">{{ serie.title|truncatechars:14 }}</h3>
-                  <p class="mt-2">{{serie.descripcion|truncatechars:40}}.</p>
-                  <a href="" style="text-align: center;" class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-eye"></i></a>
-              </div>
-          </div>
-        
-  
-    {% endfor %}
-    </div>
-
-    </div>
-  
+    
   </section>
+
+  <h1 class="text-center text-3xl m-8 font-bold ">Series</h1>
+  <section>  
   <div class="container mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
     
-  </div>
-  <h1 class="text-center text-3xl font-bold ">Series</h1>
-  <section>
+    {% for serie in series_view %}
 
+    <!-- Series -->
+    <div class="bg-gray-300 shadow-lg  rounded-lg overflow-hidden">
+      <a href="">
+      <img src="{{ serie.portada }}" alt="Series" class="w-full h-64 object-cover object-center"></a>
+            <div class="p-4">
+                <h3 class="text-lg font-bold">{{ serie.title|truncatechars:14 }}</h3>
+                <p class="mt-2">{{serie.descripcion|truncatechars:40}}.</p>
+                <a href="" style="text-align: center;" class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-eye"></i></a>
+            </div>
+    </div>
+  {% endfor %}
+  </div>
   </section>
 {% endblock %}
