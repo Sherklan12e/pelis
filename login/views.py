@@ -93,3 +93,13 @@ def eliminarcomentario(request, peliid, comen):
         comen.delete()
         return redirect('detailpeli', pk=peliid)
     return redirect('detailpeli', pk=peliid)
+
+@login_required()
+def eliminarcomentario18(request, peliid18, comen):
+    comentario_id = decrypt(peliid18)
+    comen = get_object_or_404(Comment, id=comen)
+    
+    if request.method == 'POST':
+        comen.delete()
+        return redirect('detail18', pk=peliid18)
+    return redirect('detail18', pk=peliid18)

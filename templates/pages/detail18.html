@@ -1,78 +1,96 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-
-<body class="bg-gray-100">
+  <body class="bg-gray-100">
     <div class="container mx-auto p-4">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <!-- Video grande -->
         <div class="lg:col-span-2">
           <div class="mb-4 relative" style="padding-top: 56.25%">
-            <iframe class="absolute top-0 left-0 w-full h-full"  src="{{ pos.codigo }}"  frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen>></iframe>
+            <iframe class="absolute top-0 left-0 w-full h-full" src="{{ pos.codigo }}" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" allowfullscreen>></iframe>
           </div>
-          
-            
-          <a href="javascript:history.back()" class="border border-lime-500 text-center  w-28 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110  duration-300 block bg-gray-800 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"><i class="text-2xl fa-solid fa-left-long text-center"></i></a>
-          <div class="col-span-2 ">
-            <h2 class="text-3xl font-bold mb-4">{{pos.nombre}}</h2>
-            <div class="flex items-center mb-4">
-                <span class="text-gray-600 mr-2">Género:</span>
-                
-                {% for tag in pos.generos.all %}
-                    <span class="text-blue-500 font-bold">{{ tag.nombre }}|</span>
-                  {% endfor %}
-                  
-            </div>
 
+          <a href="javascript:history.back()" class="border border-lime-500 text-center w-28 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 duration-300 block bg-gray-800 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"><i class="text-2xl fa-solid fa-left-long text-center"></i></a>
+          <div class="col-span-2">
+            <h2 class="text-3xl font-bold mb-4">{{ pos.nombre }}</h2>
+            <div class="flex items-center mb-4">
+              <span class="text-gray-600 mr-2">Género:</span>
+                
+              
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6 mt-6">
+                  
+                
+            {% for tag in pos.generos.all %}
+              <span class="text-blue-500 font-bold">{{ tag.nombre }}|</span>
+            {% endfor %}
+            {% if todosloscomentarios %}
+            {% for comentario in todosloscomentarios  %}
+                    
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <img src="{{ comentario.author.profile.imagen.url }}" alt="Avatar" class="w-10 h-10 rounded-full mr-4">
+                    <div>
+                        <h3 class="text-lg font-bold">{{ comentario.author }}</h3>
+                        <p class="text-gray-600">{{ comentario.text }}</p>
+                    </div>
+                </div>
+                
+                {% if request.user.is_authenticated  %}
+                    
+                    {% if request.user == comentario.author %}
+                        <form method="POST" action="{% url 'eliminarcomentario18' incr comentario.id  %}">
+                            {% csrf_token %}
+                            <button type="submit" class="text-red-500 hover:text-red-700">Eliminar</button> 
+                            
+                        </form>
+                    {% endif %}
+                {% endif %}
+            </div>
+            
+            {% endfor %}
+        
+      {% endif %}
+
+        <form  method="POST" class="flex flex-col">
+          {% csrf_token %}
+          {{formscoment}}
+        
+          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg self-start">Enviar Comentario</button>
+      </form>
+    </div>
 
             <div class="bg-gray-100 py-8">
               <h2 class="text-2xl font-bold mb-4">Videos Relacionadas</h2>
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                
-                 
-                 {% for seiresrela in aleatorio2 %}
-                      
-                     
-                      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                          <a href="{% url 'detail18' seiresrela.encrypt_key %}">
-      
-                              <img src="{{seiresrela.imagen}}" alt="Película Relacionada 1" class="w-full h-48 object-cover object-center">
-                          </a>
-                          <div class="p-4">
-                              <h3 class="text-lg font-bold mb-2">{{seiresrela.nombre|truncatechars:16}}</h3>
-                              <p class="text-gray-600">{{seiresrela.descripcion|truncatechars:14}}</p>
-                              <a href="{% url 'detail18' seiresrela.encrypt_key %}" class="block mt-3 text-blue-600 hover:underline">Ver Detalles</a>
-                          </div>
-                      </div>
-                          
-                 {% endfor %}
-                  
+                {% for seiresrela in aleatorio2 %}
+                  <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <a href="{% url 'detail18' seiresrela.encrypt_key  %}"><img src="{{ seiresrela.imagen }}" alt="Película Relacionada 1" class="w-full h-48 object-cover object-center" /></a>
+                    <div class="p-4">
+                      <h3 class="text-lg font-bold mb-2">{{ seiresrela.nombre|truncatechars:16 }}</h3>
+                      <p class="text-gray-600">{{ seiresrela.descripcion|truncatechars:14 }}</p>
+                      <a href="{% url 'detail18'  seiresrela.encrypt_key  %}" class="block mt-3 text-blue-600 hover:underline">Ver Detalles</a>
+                    </div>
+                  </div>
+                {% endfor %}
               </div>
+            </div>
           </div>
-            
-            
-            
-            
-            
-        </div>
         </div>
         <!-- Lista de videos -->
         <div class="lg:col-span-1">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
-           
-           {% for vi  in aleatorio1 %}
-            <div class="bg-white rounded overflow-hidden shadow-md">
-              <a href="{% url 'detail18' vi.encrypt_key %}"><img src="{{vi.imagen}}" class="w-full h-48 object-cover object-center" alt=""></a>
-              <div class="p-4">
-                <h3 class="text-lg font-semibold">{{vi.nombre}}</h3>
+            {% for vi in aleatorio1 %}
+              <div class="bg-white rounded overflow-hidden shadow-md">
+                <a href="{% url 'detail18'  vi.encrypt_key  %}"><img src="{{ vi.imagen }}" class="w-full h-48 object-cover object-center" alt="" /></a>
+                <div class="p-4">
+                  <h3 class="text-lg font-semibold">{{ vi.nombre }}</h3>
+                </div>
               </div>
-            </div>
-           {% endfor %}
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
   </body>
-{% endblock content %}
-    
+{% endblock %}

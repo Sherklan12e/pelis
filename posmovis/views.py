@@ -1,7 +1,7 @@
 import os 
 from django.shortcuts import render, redirect
 from .forms import Register
-
+from django.core.paginator import Paginator
 from login.models import pelicula, series
 from perfil.models import mayores
 from django.contrib.auth import login
@@ -102,9 +102,12 @@ def seriespage(request):
     return render(request, 'pages/series.html' , context)
 
 def page18(request):
-    todos = mayores.objects.all()[:20]
+    todos = mayores.objects.all()
+    pagin = Paginator(todos ,20)
+    pag_num = request.GET.get('page')
+    pag_ob = pagin.get_page(pag_num)
     encrypted_todoss = []
-    for todoss in todos:
+    for todoss in pag_ob:
         encrypted_todo = {
             'id': todoss.id,
             'encrypt_key': encrypt(todoss.id),
@@ -113,10 +116,10 @@ def page18(request):
             'encrypt_key': encrypt(todoss.id),  
         }
         encrypted_todoss.append(encrypted_todo)
-        
+    
     context = {
         "encrypted_todoss":encrypted_todoss,
-        "todos":todos
+        "pag_ob":pag_ob
     }
     return render(request, 'pages/page18.html', context)
 
