@@ -12,7 +12,6 @@ class Profile(models.Model):
     imagen = models.ImageField(upload_to="perfiles/" )
     sexo = models.CharField(max_length=10, choices=[('hombre', 'Hombre'), ('mujer', 'Mujer')], default='otro')
     country = CountryField(default="NZ")
-    edad = models.DateField(default=date.today)
     
     
     def es_mayordeedad(self):
