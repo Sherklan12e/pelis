@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'koyebdb',
+        'NAME': 'pagge',
         'USER': 'koyeb-adm',
         'PASSWORD': 'pulzRfFPCx13',
         'HOST': 'ep-noisy-frost-a2x64nnu.eu-central-1.pg.koyeb.app',

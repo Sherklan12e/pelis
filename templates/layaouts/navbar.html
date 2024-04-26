@@ -9,10 +9,8 @@
           
           
           {% if user.is_authenticated %}
-          {% if request.user.profile.es_mayor_edad %}
             
           <li><a href="{% url '18' %}" class="text-white font-semibold">+18</a></li>
-          {% endif %}
           {% endif %}
             
             

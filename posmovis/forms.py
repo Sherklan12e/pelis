@@ -17,14 +17,7 @@ class Register(forms.Form):
     sexo = forms.ChoiceField(choices=CHOICES, label='', widget=forms.Select(attrs={'class': 'my-4 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500', 'placeholder': 'Género'}))
     email = forms.EmailField(required=True, label='', widget=forms.EmailInput(attrs={'class': 'my-4 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500', 'placeholder': 'Correo'}))
     country = CountryField().formfield(label='', widget=forms.Select(attrs={'class': 'my-4 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500', 'placeholder': 'País'}))
-    edad = forms.DateField( required=True ,label='',
-        widget=forms.DateInput(
-            attrs={
-            'class':"my-4 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500",
-            'type':"date"
-            }
-        )
-    )
+    
     
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -43,8 +36,7 @@ class Register(forms.Form):
             user=user,
             sexo=self.cleaned_data['sexo'],
             country=self.cleaned_data['country'],
-            imagen = path_imag,
-            edad = self.cleaned_data['edad']
+            imagen = path_imag
             
         )
         return user
