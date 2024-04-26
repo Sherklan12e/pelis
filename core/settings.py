@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-ENCRYPT_KEY =b'r7Y-Wtm51P_vAwm77Nbh8tIgCRcYf0-hjVdCbQFhtvA='
+ENCRYPT_KEY = config('ENCRYPT_KEY')
 # SECURITY WARNING: don't run with debug turned     on in production!
 DEBUG =False
 
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'koyebdb',
+        'NAME': 'pagge',
         'USER': 'koyeb-adm',
         'PASSWORD': 'pulzRfFPCx13',
         'HOST': 'ep-noisy-frost-a2x64nnu.eu-central-1.pg.koyeb.app',
