@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-ENCRYPT_KEY = config('ENCRYPT_KEY')
+ENCRYPT_KEY =b'r7Y-Wtm51P_vAwm77Nbh8tIgCRcYf0-hjVdCbQFhtvA='
 # SECURITY WARNING: don't run with debug turned     on in production!
 DEBUG =False
 
