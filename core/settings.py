@@ -110,5 +110,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+MEDIA_URL = '/perfiles/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'perfiles')
+
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 PRISM_INSERTED = os.path.join(BASE_DIR, "staticfiles")
