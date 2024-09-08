@@ -16,7 +16,9 @@ from random import shuffle
 def view_profile(request, username):
     profile = get_object_or_404(Profile, user__username=username)
    
-    
+    print(profile.imagen)
+    print(profile.imagen.url)
+    print("hola")
     
     return render(request, "profile/perfil.html", {"profile": profile})
 

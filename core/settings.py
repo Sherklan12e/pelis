@@ -81,11 +81,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pagge',
-        'USER': 'koyeb-adm',
-        'PASSWORD': 'pulzRfFPCx13',
-        'HOST': 'ep-noisy-frost-a2x64nnu.eu-central-1.pg.koyeb.app',
-        'PORT': '5432', 
+        'NAME': 'verceldb',
+        'USER': 'default',  # Cambié a 'default' ya que es el usuario correcto según tus variables
+        'PASSWORD': 'pT6C7tdauYSl',
+        'HOST': 'ep-plain-dew-a4g8c6ot-pooler.us-east-1.aws.neon.tech',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',  # Para asegurarte de que la conexión sea segura (SSL habilitado)
+        }
     }
 }
 
