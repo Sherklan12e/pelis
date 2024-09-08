@@ -18,6 +18,17 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.user.username
+    def save(self, *args, **kwargs):
+        # Check if the image is not already set
+        if not self.imagen:
+            # Create a default image if not present
+            default_image = PILImage.new('RGB', (100, 100), color='grey')  # Create a new image with default color
+            image_io = BytesIO()
+            default_image.save(image_io, format='jpg')
+            image_file = ContentFile(image_io.getvalue(), 'user.jpg')
+            self.imagen = image_file
+        
+        super(Profile, self).save(*args, **kwargs)
 
 class Comment(models.Model):
     DEFAULT_CONTENT_TYPE = 1 
