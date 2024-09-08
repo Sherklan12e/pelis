@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-ENCRYPT_KEY =b'r7Y-Wtm51P_vAwm77Nbh8tIgCRcYf0-hjVdCbQFhtvA='
+ENCRYPT_KEY =b'joJiMPlNvPCaXDJ2ibURtKCp8I7O3lM0NJs8aoJSgxA='
 # SECURITY WARNING: don't run with debug turned     on in production!
 DEBUG =False
 
@@ -81,11 +81,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pagge',
-        'USER': 'koyeb-adm',
-        'PASSWORD': 'pulzRfFPCx13',
-        'HOST': 'ep-noisy-frost-a2x64nnu.eu-central-1.pg.koyeb.app',
-        'PORT': '5432', 
+        'NAME': 'verceldb',
+        'USER': 'default',  # Cambié a 'default' ya que es el usuario correcto según tus variables
+        'PASSWORD': 'pT6C7tdauYSl',
+        'HOST': 'ep-plain-dew-a4g8c6ot-pooler.us-east-1.aws.neon.tech',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',  # Para asegurarte de que la conexión sea segura (SSL habilitado)
+        }
     }
 }
 
@@ -110,5 +113,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+MEDIA_URL = '/perfiles/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'perfiles')
+
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 PRISM_INSERTED = os.path.join(BASE_DIR, "staticfiles")

@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.urls import path
 from posmovis.views import index , registeruser, Loginuser, salir, peliculaspage, seriespage, page18
 from login.views import detailpeli, megusta, nomegusta, eliminarcomentario, eliminarcomentario18
-from perfil.views import view_profile, editarperfil, detail18
+from perfil.views import view_profile, editarperfil, detail18, detailserie, serieele
 from login import views
 
 urlpatterns = [
@@ -18,6 +18,8 @@ urlpatterns = [
     path('peliculas/', peliculaspage, name='peliculas'),
     #series
     path('series/', seriespage, name='series'),
+    path('series/<int:pk>/', detailserie , name='seriedetail'),
+    path("series/<int:se>/capitulos/<int:cap>/", serieele, name="seriecap"),
     
     #18
     path('page18/', page18, name='18'),
@@ -43,7 +45,10 @@ urlpatterns = [
     path('profile/<str:username>/', view_profile, name='profile'),
     path('profile/', editarperfil , name='editarperfil')
     
-]
-
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler404 = views.error_404_view

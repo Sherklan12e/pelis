@@ -4,17 +4,21 @@ from posmovis.models import Profile,Comment
 from posmovis.forms import CommentForm
 from django.contrib.contenttypes.models import ContentType
 from .models import mayores
+from login.models import series, agregar_cap
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .forms import Editarform
 from login.encryption_util import *
 from django.contrib.auth.decorators import login_required 
 from django.core.paginator import Paginator
+from random import shuffle
 
 def view_profile(request, username):
     profile = get_object_or_404(Profile, user__username=username)
    
-    
+    print(profile.imagen)
+    print(profile.imagen.url)
+    print("hola")
     
     return render(request, "profile/perfil.html", {"profile": profile})
 
@@ -104,3 +108,47 @@ def detail18(request, pk):
         'al':al
     }
     return render(request, 'pages/detail18.html', context)
+
+
+
+def detailserie(request,pk):
+    se = get_object_or_404(series, id=pk)
+    cap = se.partesss.all()
+    todas_series = series.objects.all()
+    todas_series_lista = list(todas_series)
+    shuffle(todas_series_lista)  # Mezclar la lista aleatoriamente
+    todo = todas_series_lista[:12]
+    return render(request, 'pages/detailserie.html' ,{'se':se,'cap':cap, 'todo':todo})
+
+
+def serieele(request,se,cap):
+    seri = get_object_or_404(series, id=se)
+    caps = get_object_or_404(seri.partesss, id=cap)
+    partes = seri.partesss.all()
+    
+    todas_series = series.objects.all()
+    todas_series_lista = list(todas_series)
+    
+    shuffle(todas_series_lista)  # Mezclar la lista aleatoriamente
+    todo = todas_series_lista[:12]
+    
+    content_ty = ContentType.objects.get_for_model(caps)
+    if request.method=='POST':
+        formscoment = CommentForm(request.POST)
+        if formscoment.is_valid():
+            comentario = formscoment.save(commit=False)
+            if request.user.is_authenticated:
+                comentario.author = request.user
+            else:
+                return redirect('login')
+            comentario.contentype = content_ty
+            comentario.object_id = caps.id
+            comentario.save()
+            
+            return redirect('seriecap', seri.id , caps.id)
+    else:
+        formscoment = CommentForm()
+    
+    todosloscomentarios = Comment.objects.filter(contentype=content_ty, object_id=caps.id)
+    
+    return render(request, 'pages/detailcap.html' , {'seri':seri, 'caps':caps, 'partes':partes, 'todo':todo , 'formscoment':formscoment, 'todosloscomentarios':todosloscomentarios})

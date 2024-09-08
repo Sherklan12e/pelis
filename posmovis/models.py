@@ -18,6 +18,12 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.user.username
+    def save(self, *args, **kwargs):
+        if not self.imagen:
+            self.imagen = 'user.jpg'
+        super(Profile, self).save(*args, **kwargs)
+
+        
 
 class Comment(models.Model):
     DEFAULT_CONTENT_TYPE = 1 
