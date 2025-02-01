@@ -1,6 +1,6 @@
-<nav class="bg-gray-800 p-4">
+<nav class="bg-pink-500/60 p-4">
   <div class="container mx-auto flex justify-between items-center">
-      <a href="/" class="text-white font-bold text-lg">Ferplis</a>
+      <a href="/" class="text-white font-bold text-lg">GlogloPelis</a>
       <ul class="flex space-x-7">
           <li><a href="/" class="text-white font-semibold ">Inicio</a></li>
           <li><a href="{% url 'peliculas' %}" class="text-white font-semibold">Películas</a></li>
@@ -14,10 +14,13 @@
           <li><a href="" class="text-white font-semibold">Contactanos</a></li>
           
           {% if user.is_authenticated %}
-          <li><a href="{% url 'profile' request.user %}" class="text-white font-semibold">{{request.user}}</a></li>
+          <li><a href="{% url 'profile' request.user %}" class="text-white font-semibold">
+            {{ request.user.username|slice:":10" }}
+        </a>
+        </li>
             <li class="relative">
               <div class="h-6 w-6 rounded-full overflow-hidden bg-gray-500 flex items-center justify-center">
-                  <a href="{% url 'profile' request.user %}"><img src="{{request.user.profile.imagen.url}}" alt="Foto de perfil" class="h-full w-full object-cover"></a>
+                  <a href="{% url 'profile' request.user %}"><img src="https://i.pinimg.com/736x/de/63/9e/de639e327902c1dc449fd53b157d7e71.jpg" alt="Foto de perfil" class="h-full w-full object-cover"></a>
               </div>
             </li>
           <li><a href="{% url 'salir' %}" class="text-white"><i class="fa-solid fa-right-to-bracket"></i> salir</a></li>

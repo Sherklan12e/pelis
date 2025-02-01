@@ -9,10 +9,11 @@ SECRET_KEY = config('SECRET_KEY')
 
 ENCRYPT_KEY =b'joJiMPlNvPCaXDJ2ibURtKCp8I7O3lM0NJs8aoJSgxA='
 # SECURITY WARNING: don't run with debug turned     on in production!
-DEBUG =False
+DEBUG =True
 
-ALLOWED_HOSTS = ['*']
 
+
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -78,6 +79,13 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / "db.sqlite3",
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -113,10 +121,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Para producción
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directorio correcto para archivos de usuario
 
 
-MEDIA_URL = '/perfiles/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'perfiles')
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 PRISM_INSERTED = os.path.join(BASE_DIR, "staticfiles")

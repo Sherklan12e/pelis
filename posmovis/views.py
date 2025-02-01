@@ -9,6 +9,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from login.encryption_util import *
+from django.db.models import Q
+
 def index(request):
     todo = pelicula.objects.all()[:5]
     series_view = series.objects.all()[:5]
@@ -122,4 +124,57 @@ def page18(request):
         "pag_ob":pag_ob
     }
     return render(request, 'pages/page18.html', context)
+
+def buscar(request):
+    query = request.GET.get('q', '')
+    if query:
+        # Búsqueda en películas
+        peliculas = pelicula.objects.filter(
+            Q(nombre__icontains=query) |
+            Q(descripcion__icontains=query)
+        )
+        
+        # Búsqueda en series
+        series_results = series.objects.filter(
+            Q(title__icontains=query) |
+            Q(descripcion__icontains=query)
+        )
+        
+        # Encriptar IDs de películas para las URLs
+        encrypted_peliculas = []
+        for peli in peliculas:
+            encrypted_peli = {
+                'id': peli.id,
+                'encrypt_key': encrypt(peli.id),
+                'nombre': peli.nombre,
+                'imagen': peli.imagen,
+                'descripcion': peli.descripcion,
+                'tipo': 'pelicula'
+            }
+            encrypted_peliculas.append(encrypted_peli)
+        
+        # Preparar resultados de series
+        series_list = []
+        for serie in series_results:
+            series_item = {
+                'id': serie.id,
+                'nombre': serie.title,
+                'imagen': serie.portada,
+                'descripcion': serie.descripcion,
+                'tipo': 'serie'
+            }
+            series_list.append(series_item)
+
+    else:
+        encrypted_peliculas = []
+        series_list = []
+
+    context = {
+        'query': query,
+        'peliculas': encrypted_peliculas,
+        'series': series_list,
+        'total_results': len(encrypted_peliculas) + len(series_list)
+    }
+    
+    return render(request, 'pages/resultados_busqueda.html', context)
 

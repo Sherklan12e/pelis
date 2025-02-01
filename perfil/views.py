@@ -12,11 +12,13 @@ from login.encryption_util import *
 from django.contrib.auth.decorators import login_required 
 from django.core.paginator import Paginator
 from random import shuffle
+from django.contrib.auth import logout
 
 def view_profile(request, username):
     profile = get_object_or_404(Profile, user__username=username)
    
     print(profile.imagen)
+    print("puree")
     print(profile.imagen.url)
     print("hola")
     
@@ -152,3 +154,9 @@ def serieele(request,se,cap):
     todosloscomentarios = Comment.objects.filter(contentype=content_ty, object_id=caps.id)
     
     return render(request, 'pages/detailcap.html' , {'seri':seri, 'caps':caps, 'partes':partes, 'todo':todo , 'formscoment':formscoment, 'todosloscomentarios':todosloscomentarios})
+@login_required
+def eliminar_cuenta(request):
+    user = request.user
+    logout(request)
+    user.delete()
+    return redirect('index')

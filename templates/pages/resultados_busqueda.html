@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="bg-pink-500/60 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-3xl font-bold mb-6 text-white">Resultados de búsqueda para: "{{ query }}"</h2>
+    <p class="mb-4">Se encontraron {{ total_results }} resultados</p>
+
+    {% if peliculas or series %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            {% for peli in peliculas %}
+                <div class="bg-gray-300 shadow-lg rounded-lg overflow-hidden">
+                    <a href="{% url 'detailpeli' peli.encrypt_key %}">
+                        <img src="{{ peli.imagen }}" alt="{{ peli.nombre }}" 
+                             class="w-full h-64 object-cover object-center">
+                    </a>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold">{{ peli.nombre|truncatechars:14 }}</h3>
+                        <p class="text-sm text-gray-600 mb-2">Película</p>
+                        <a href="{% url 'detailpeli' peli.encrypt_key %}" 
+                           class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for serie in series %}
+                <div class="bg-gray-300 shadow-lg rounded-lg overflow-hidden">
+                    <a href="{% url 'seriedetail' serie.id %}">
+                        <img src="{{ serie.imagen }}" alt="{{ serie.nombre }}" 
+                             class="w-full h-64 object-cover object-center">
+                    </a>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold">{{ serie.nombre|truncatechars:14 }}</h3>
+                        <p class="text-sm text-gray-600 mb-2">Serie</p>
+                        <a href="{% url 'seriedetail' serie.id %}" 
+                           class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-8">
+            <p class="text-xl text-gray-600">No se encontraron resultados para tu búsqueda.</p>
+            <a href="/" class="inline-block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded">
+                Volver al inicio
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+
+</div>
+{% endblock %}

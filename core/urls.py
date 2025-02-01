@@ -3,9 +3,9 @@ from django.conf.urls.static import static
 from django.conf.urls import handler404
 from django.contrib import admin
 from django.urls import path
-from posmovis.views import index , registeruser, Loginuser, salir, peliculaspage, seriespage, page18
+from posmovis.views import index , registeruser, Loginuser, salir, peliculaspage, seriespage, page18 , buscar
 from login.views import detailpeli, megusta, nomegusta, eliminarcomentario, eliminarcomentario18
-from perfil.views import view_profile, editarperfil, detail18, detailserie, serieele
+from perfil.views import view_profile, detail18, detailserie, serieele,eliminar_cuenta
 from login import views
 
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
 
     #index
     path('', index, name='index'),
+    path('buscar/', buscar, name='buscar'),
     
     #pelicuas
     path('peliculas/', peliculaspage, name='peliculas'),
@@ -43,12 +44,14 @@ urlpatterns = [
     
     #perfil 
     path('profile/<str:username>/', view_profile, name='profile'),
-    path('profile/', editarperfil , name='editarperfil')
+    path('profile_eliminarcuenta/', eliminar_cuenta, name='eliminar_cuenta'),
+    # path('profile/', editarperfil , name='editarperfil')
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-handler404 = views.error_404_view
+
+# handler404 = views.error_404_view

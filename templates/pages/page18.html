@@ -1,53 +1,47 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
-<section>
-    
-    
-      
+<section class="bg-pink-500/60 min-h-screen py-8">
     <div class="container mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-      {% for peli in encrypted_todoss %}
+        {% for peli in encrypted_todoss %}
 
-      <!-- Película 1 -->
-      <div class="bg-gray-300 shadow-lg  rounded-lg overflow-hidden">
-        <a href="{% url 'detail18' peli.encrypt_key %}">
-        <img src="{{ peli.imagen }}" alt="Película 1" class="w-full h-64 object-cover object-center"></a>
-              <div class="p-4">
-                  <h3 class="text-lg font-bold">{{ peli.nombre|truncatechars:26 }}</h3>
-                  <a href="{% url 'detail18' peli.encrypt_key  %}" style="text-align: center;" class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-eye"></i></a>
-              </div>
-      </div>
+        <!-- Película 1 -->
+        <div class="bg-gray-300 shadow-lg  rounded-lg overflow-hidden">
+            <a href="{% url 'detail18' peli.encrypt_key %}">
+                <img src="{{ peli.imagen }}" alt="Película 1" class="w-full h-64 object-cover object-center"></a>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold">{{ peli.nombre|truncatechars:26 }}</h3>
+                    <a href="{% url 'detail18' peli.encrypt_key  %}" style="text-align: center;" class="block mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"><i class="fa-solid fa-eye"></i></a>
+                </div>
+        </div>
         
-  
-    {% endfor %}
-   <!-- Botones de navegación -->
-   {% if pag_ob.has_other_pages %}
-   <div class="mt-8">
-       <ul class="flex justify-center space-x-4">
-           {% if pag_ob.has_previous %}
-           <li>
-               <a href="?page=1" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">First</a>
-           </li>
-           <li>
-               <a href="?page={{ pag_ob.previous_page_number }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Previous</a>
-           </li>
-           {% endif %}
-           <li class="px-3 py-1 bg-blue-500 text-white rounded-md">{{ pag_ob.number }}</li>
-           {% if pag_ob.has_next %}
-           <li>
-               <a href="?page={{ pag_ob.next_page_number }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Next</a>
-           </li>
-           <li>
-               <a href="?page={{ pag_ob.paginator.num_pages }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Last</a>
-           </li>
-           {% endif %}
-       </ul>
-   </div>
-   {% endif %}
-   
-   
-  
+
+        {% endfor %}
+        <!-- Botones de navegación -->
+        {% if pag_ob.has_other_pages %}
+        <div class="mt-8">
+            <ul class="flex justify-center space-x-4">
+                {% if pag_ob.has_previous %}
+                <li>
+                    <a href="?page=1" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">First</a>
+                </li>
+                <li>
+                    <a href="?page={{ pag_ob.previous_page_number }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Previous</a>
+                </li>
+                {% endif %}
+                <li class="px-3 py-1 bg-blue-500 text-white rounded-md">{{ pag_ob.number }}</li>
+                {% if pag_ob.has_next %}
+                <li>
+                    <a href="?page={{ pag_ob.next_page_number }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Next</a>
+                </li>
+                <li>
+                    <a href="?page={{ pag_ob.paginator.num_pages }}" class="px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Last</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
 </section>
 {% endblock content %}
     

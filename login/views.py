@@ -66,6 +66,7 @@ def detailpeli(request, pk):
 
 @login_required()
 def megusta(request,pk):
+    
     movilike = get_object_or_404(pelicula, id=pk)
     movilike.like +=1
     movilike.save()
@@ -80,9 +81,9 @@ def nomegusta(request, pk):
     
     return redirect("detailpeli", pk=pk)
 
-def error_404_view(request, exception):
-    context = {}
-    return render(request, '404.html', context)
+# def error_404_view(request, exception):
+#     context = {}
+#     return render(request, '404.html', context)
 
 @login_required()
 def eliminarcomentario(request, peliid, comen):
