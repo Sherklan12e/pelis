@@ -9,7 +9,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 ENCRYPT_KEY =b'joJiMPlNvPCaXDJ2ibURtKCp8I7O3lM0NJs8aoJSgxA='
 # SECURITY WARNING: don't run with debug turned     on in production!
-DEBUG =True
+DEBUG = False
 
 
 
@@ -79,26 +79,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'verceldb',
-        'USER': 'default',  # Cambié a 'default' ya que es el usuario correcto según tus variables
-        'PASSWORD': 'pT6C7tdauYSl',
-        'HOST': 'ep-plain-dew-a4g8c6ot-pooler.us-east-1.aws.neon.tech',
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require',  # Para asegurarte de que la conexión sea segura (SSL habilitado)
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / "db.sqlite3",
     }
 }
+
+
 
 
 # Password validation

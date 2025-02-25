@@ -2,15 +2,21 @@
 {% block title %}Editar Perfil{% endblock title %}
 {% block content %}
 
-<div class="container mx-auto px-4 py-8">
-    <div class="max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-        <div class="bg-gray-200 p-4">
-            <h2 class="text-2xl font-semibold text-center mt-4">Editar Perfil</h2>
+<div class="container mx-auto px-4 py-8 flex justify-center">
+    <div class="max-w-lg w-full bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-gray-800 text-white p-6 text-center">
+            <h2 class="text-3xl font-semibold">Editar Perfil</h2>
         </div>
-        <form class="p-4" method="post" enctype="multipart/form-data">
+        <form class="p-6 space-y-4" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{forms}}
-            <button>aceptar</button>
+            <div class="space-y-4">
+                {{ forms.as_p }}
+            </div>
+            <div class="flex justify-center">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                    Aceptar
+                </button>
+            </div>
         </form>
     </div>
 </div>

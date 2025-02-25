@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 
-                {% if request.user.is_authenticated  %}
+                {% comment %} {% if request.user.is_authenticated  %}
                     
                     {% if request.user == comentario.author %}
                         <form method="POST" action="{% url 'eliminarcomentario18' incr comentario.id  %}">
@@ -45,7 +45,7 @@
                             
                         </form>
                     {% endif %}
-                {% endif %}
+                {% endif %} {% endcomment %}
             </div>
             
             {% endfor %}

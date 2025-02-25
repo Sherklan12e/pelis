@@ -47,14 +47,14 @@
                     
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center">
-                    <img src="https://i.pinimg.com/736x/de/63/9e/de639e327902c1dc449fd53b157d7e71.jpg   " alt="Avatar" class="w-10 h-10 rounded-full mr-4">
+                    <img src="{{comentario.author.profile.imagen.url}}" alt="Avatar" class="w-10 h-10 rounded-full mr-4">
                     <div>
                         <h3 class="text-lg font-bold">{{ comentario.author }}</h3>
                         <p class="text-gray-600">{{ comentario.text }}</p>
                     </div>
                 </div>
                 
-                {% if request.user.is_authenticated  %}
+                {% comment %} {% if request.user.is_authenticated  %}
                     
                     {% if request.user == comentario.author %}
                         <form method="POST" action="{% url 'eliminarcomentario' incr comentario.id  %}">
@@ -63,7 +63,7 @@
                             
                         </form>
                     {% endif %}
-                {% endif %}
+                {% endif %} {% endcomment %}
             </div>  
             
             {% endfor %}
